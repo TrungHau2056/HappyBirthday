@@ -31,7 +31,7 @@ Celebrate birthdays with style! This project is a customizable birthday greeting
 
 3. **To customize:**
    - Edit the `name`, messages, and target birthday date inside `index.html`.
-   - Replace the image (`sha1.jpg`), GIF (`cake.gif`), and music files as desired.
+   - Replace the image (`image.jpg`), GIF (`cake.gif`), and music files as desired.
    - Update the YouTube link in `surprise.html` with your own surprise video.
 
 ## 📁 Folder Structure
