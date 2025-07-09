@@ -24,7 +24,7 @@ Celebrate birthdays with style! This project is a customizable birthday greeting
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/happy-birthday-website.git
+   git clone https://github.com/yashvinthan/happy-birthday-website.git
    ```
 
 2. **Open `index.html`** in your browser or host the folder using GitHub Pages or any static web host.
@@ -51,7 +51,7 @@ Celebrate birthdays with style! This project is a customizable birthday greeting
 
 If deployed on GitHub Pages:
 ```
-https://your-username.github.io/happy-birthday-website/
+https://yashvinthan.github.io/happy-birthday-website/
 ```
 
 ## 📄 License
