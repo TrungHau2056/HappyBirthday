@@ -49,10 +49,7 @@ Celebrate birthdays with style! This project is a customizable birthday greeting
 
 ## 🔗 Live Demo
 
-If deployed on GitHub Pages:
-```
-https://yashvinthan.github.io/happy-birthday-website/
-```
+[🔗 Click here to view the demo](https://yashvinthan.github.io/happy-birthday-website/)
 
 ## 📄 License
 
