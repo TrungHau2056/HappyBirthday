@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0e0e2c;
+      --text-color: #ffffff;
+      --primary-color: #ff4fba;
+      --button-hover: #e43ca0;
+    }
+
+    body.dark-mode {
+      --bg-color: #ffffff;
+      --text-color: #1e1e2f;
+      --primary-color: #d46eff;
+      --button-hover: #a84ef0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background 0.5s ease;
+      overflow-x: hidden;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 20px;
+      font-weight: bold;
+    }
+
+    .navbar nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .navbar nav a, .toggle-darkmode {
+      margin-left: 15px;
+      margin-top: 10px;
+    }
+
+    .navbar nav a {
+      color: var(--text-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .toggle-darkmode {
+      cursor: pointer;
+      background: transparent;
+      border: 2px solid var(--text-color);
+      border-radius: 10px;
+      padding: 8px 16px;
+      color: var(--text-color);
+      font-weight: bold;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h2 {
+      font-size: 2rem;
+      margin: 0;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      color: white;
+      text-shadow: 3px 3px #48cfff;
+      margin: 10px 0;
+      font-family: 'Pacifico', cursive;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 20px auto;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: var(--primary-color);
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      box-shadow: 3px 3px #c4f2ff;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--button-hover);
+    }
+
+    .countdown {
+      margin-top: 20px;
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    .message-box {
+      margin-top: 40px;
+      background: white;
+      padding: 20px;
+      max-width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      color: black;
+    }
+
+    .animated-cake {
+      display: block;
+      margin: 30px auto;
+      width: 100px;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    .firework, .star, .sparkle {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .firework {
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(3); }
+    }
+
+    .star {
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    .sparkle {
+      width: 4px;
+      height: 4px;
+      background: gold;
+      border-radius: 50%;
+      animation: sparkleFloat 3s infinite linear;
+    }
+
+    @keyframes sparkleFloat {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .btn {
+        padding: 12px 24px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" class="song" loop autoplay>
+    <source src="./music/Ladyfingers.mp3" type="audio/mp3">
+    Your browser isn't invited for super fun audio time.
+  </audio>
+
+  <div class="navbar">
+    <span class="logo">• Yashvinthan</span>
+    <nav>
+      <a href="#">Home</a>
+      <a href="surprise.html">surprise</a>
+    </nav>
+  </div>
+
+  <main class="hero">
+    <h2>HAPPY</h2>
+    <h1>BIRTHDAY name!</h1>
+    <p>Wishing you joy, laughter, and everything you love. Enjoy your special day to the fullest!</p>
+    <div class="countdown" id="countdown"></div>
+    <a href="#" class="btn" id="goNowBtn" style="pointer-events: none; opacity: 0.5;">GO NOW</a>
+    <div class="message-box">
+      <p>🎁 From Yash: "Happy Birthday name Wishing you an amazing year ahead!"</p>
+      <p>When you feel sad Remember that you have Me, ok? I may not be Much but I will always be By your side.</p>
+    </div>
+  </main>
+
+  <img src="cake.gif" alt="Animated Cake" class="animated-cake" />
+
+  <script>
+    function launchFirework() {
+      const fireworkCount = 20;
+      for (let i = 0; i < fireworkCount; i++) {
+        const f = document.createElement('div');
+        f.className = 'firework';
+        const x = window.innerWidth / 2 + (Math.random() - 0.5) * 300;
+        const y = window.innerHeight / 2 + (Math.random() - 0.5) * 200;
+        f.style.left = `${x}px`;
+        f.style.top = `${y}px`;
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(), 1000);
+      }
+    }
+    setInterval(launchFirework, 3000);
+
+    for (let i = 0; i < 100; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.top = Math.random() * 100 + 'vh';
+      document.body.appendChild(s);
+    }
+
+    for (let i = 0; i < 50; i++) {
+      const sp = document.createElement('div');
+      sp.className = 'sparkle';
+      sp.style.left = Math.random() * 100 + 'vw';
+      sp.style.animationDelay = (Math.random() * 5) + 's';
+      document.body.appendChild(sp);
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    const targetDate = new Date("2025-04-01T00:00:00").getTime();
+const countdownEl = document.getElementById("countdown");
+
+const interval = setInterval(() => {
+  const now = new Date().getTime();
+  const distance = targetDate - now;
+
+  if (distance <= 0) {
+    countdownEl.innerHTML = "🎉 It's your birthday! 🎉";
+    clearInterval(interval); // Stop the countdown
+
+    // Activate the button
+    goNowBtn.href = "birthday.html";
+    goNowBtn.style.pointerEvents = "auto";
+    goNowBtn.style.opacity = "1";
+
+    // Only redirect if the page was opened BEFORE the birthday
+    if (now < targetDate + 1000) {
+      setTimeout(() => {
+        window.location.href = "./birthday.html";
+      }, 2000);
+    }
+
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  countdownEl.innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+}, 1000);
+  </script>
+  <script>
+  const bgMusic = document.getElementById("bgMusic");
+  bgMusic.volume = 0.2;
+
+  // Try to play after user interacts
+  document.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      bgMusic.play();
+    }
+  });
+</script>
+</body>
+</html>
