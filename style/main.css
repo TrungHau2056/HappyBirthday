@@ -5,14 +5,17 @@ html, body {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   margin: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Clean mode: tone down the look & feel */
 body.clean .container, body.clean .container * {
   /* keep original decorative fonts */
-  color: #222 !important; /* neutral text color */
+  color: #c23d7a !important; /* pink accent for better readability */
   text-shadow: none !important; /* remove glow */
 }
 body.clean .wish-hbd,
@@ -43,7 +46,7 @@ body.clean .last-smile {
   padding: 8px 12px;
   border-radius: 12px;
   display: inline-block;
-  color: #111 !important;
+  color: #c23d7a !important;
 }
 /* Ensure links are visible in clean mode */
 body.clean .surprise-hint a { color: #0b66ff !important; text-decoration: underline !important; }
@@ -72,11 +75,9 @@ body.prompt-active .container {
 body.minimal-start .container > div { display: none; }
 body.minimal-start .container > .one { display: block; }
 
-/* Make main container text match the name styling: Pacifico + pink + soft glow */
+/* Make main container text match the original styling on the birthday page */
 .container, .container * {
   font-family: 'Pacifico', cursive !important;
-  color: #e75480 !important;
-  text-shadow: 2px 2px 8px #fff0f6 !important;
 }
 
 .song {
@@ -101,6 +102,7 @@ body.minimal-start .container > .one { display: block; }
   position: absolute;
   right: 0;
   top: 20vh;
+  z-index: 2; /* by default, section text sits above background items */
 }
 
 .one {
@@ -176,7 +178,7 @@ body.minimal-start .container > .one { display: block; }
 .six {
   position: relative;
   top: 10vh;
-  z-index: 10; /* raise above decorative layers */
+  z-index: 1; /* keep profile section under other text sections */
 }
 
 .six img {
@@ -194,7 +196,7 @@ body.minimal-start .container > .one { display: block; }
   border-radius: 12px;
   box-shadow: none;
   position: relative;
-  z-index: 11; /* above floating photos, below the hat */
+  z-index: 0; /* keep below text overlays and hat */
   object-fit: cover;
   display: inline-block;
   outline: 2px dashed rgba(231, 84, 128, 0.35); /* helper to adjust; remove if not needed */
@@ -339,7 +341,7 @@ body.minimal-start .container > .one { display: block; }
 
 /* Gag scenes */
 .gag { position: relative; display: flex; justify-content: center; align-items: center; margin: 1rem 0; opacity: 0; transform: translateY(10px); }
-.gag-card { background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 22px rgba(0,0,0,0.12); font-family: 'Poppins', sans-serif; }
+.gag-card { background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 22px rgba(0,0,0,0.12); font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
 .gag-title { font-weight: 600; color: #e75480; margin-bottom: 6px; }
 .gag-list { margin: 0; padding-left: 1rem; }
 .gag .slot { display: inline-block; min-width: 5ch; background: #fff0f6; padding: 2px 6px; border-radius: 8px; color: #e75480; }
@@ -490,11 +492,11 @@ body.minimal-start .container > .one { display: block; }
 
 /* Photo chips and caption around profile image */
 .gallery-main { position: relative; display: inline-block; }
-.photo-badges { position: absolute; inset: 0; pointer-events: none; }
-.photo-chip { position: absolute; background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.06); border-radius: 999px; padding: 6px 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: #333; opacity: 0; transform: translateY(8px); }
+.photo-badges { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+.photo-chip { position: absolute; background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.06); border-radius: 999px; padding: 6px 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; font-size: 0.9rem; color: #333; opacity: 0; transform: translateY(8px); }
 .chip-left { left: -8px; top: 12%; }
 .chip-right { right: -8px; bottom: 14%; }
-.photo-caption { text-align: center; margin-top: 10px; font-family: 'Lobster', cursive; color: #ff69b4; font-size: 1.05rem; opacity: 0; transform: translateY(8px); }
+.photo-caption { text-align: center; margin-top: 10px; font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #ff69b4; font-size: 1.05rem; opacity: 0; transform: translateY(8px); }
 
 
 /* Extra-tight adjustments for small phones */
@@ -551,7 +553,7 @@ body.minimal-start .container > .one { display: block; }
   inset: 0;
   background: rgba(0,0,0,0.6);
   color: #fff;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   z-index: 20000;
   align-items: center;
   justify-content: center;
@@ -599,3 +601,119 @@ body::before { z-index: 0; }
 .floating-gallery .floating-photo { pointer-events: none; z-index: 1; }
 .seven, .eight { z-index: 1; pointer-events: none; }
 /* 3D tilt perspective removed with fun mode */
+
+/* --- Pink special text effects --- */
+.fx-glow-pink { 
+  position: relative; 
+  color: #e75480 !important; 
+  text-shadow: 0 0 0 rgba(231,84,128,0.0);
+  animation: pinkGlow 3.2s ease-in-out infinite;
+}
+@keyframes pinkGlow {
+  0% { text-shadow: 0 0 0 rgba(231,84,128,0.0); }
+  35% { text-shadow: 0 3px 14px rgba(231,84,128,0.35); }
+  70% { text-shadow: 0 1px 8px rgba(231,84,128,0.22); }
+  100% { text-shadow: 0 0 0 rgba(231,84,128,0.0); }
+}
+.fx-underline-pink { position: relative; }
+.fx-underline-pink::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -4px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, #ff9ac3 25%, #ff4fa3 75%, transparent 100%);
+  border-radius: 999px;
+  opacity: 0.8;
+  transform: scaleX(0.85);
+  transform-origin: center;
+  animation: underlineSweep 4s cubic-bezier(.25,.8,.3,1) infinite;
+}
+@keyframes underlineSweep {
+  0% { opacity: 0.3; transform: scaleX(0.6); }
+  40% { opacity: 0.9; transform: scaleX(1); }
+  100% { opacity: 0.3; transform: scaleX(0.6); }
+}
+.fx-glow-pink:hover { transform: translateY(-1px) scale(1.02); transition: transform 160ms ease; }
+
+/* Shimmer gradient text (inline) */
+.fx-shimmer-text {
+  background-image: linear-gradient(120deg, #ff9ac3 0%, #ffd1e8 25%, #a18cd1 60%, #48c6ef 100%);
+  background-size: 220% 220%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.6px rgba(0,0,0,0.15);
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
+/* Blinking caret effect at the end of a line */
+.fx-caret { position: relative; }
+.fx-caret::after {
+  content: '';
+  display: inline-block;
+  width: 1px; height: 1.05em;
+  margin-left: 4px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  opacity: 0.8;
+  animation: caretBlink 1s steps(1) infinite;
+}
+@keyframes caretBlink { 0%, 49% { opacity: 0; } 50%, 100% { opacity: 1; } }
+
+/* Per-letter bounce on hover/click */
+.letters-bounce { display: inline-block; white-space: pre-wrap; }
+.letters-bounce .letter {
+  display: inline-block;
+  cursor: pointer;
+  transition: transform 180ms ease;
+  will-change: transform;
+}
+.letters-bounce .letter:hover { transform: translateY(-2px) scale(1.06); }
+.letters-bounce .letter.pop { animation: letterPop 520ms cubic-bezier(.2,.9,.2,1.1); }
+@keyframes letterPop {
+  0% { transform: translateY(0) scale(1) rotate(0deg); }
+  35% { transform: translateY(-6px) scale(1.25) rotate(-8deg); }
+  70% { transform: translateY(2px) scale(0.96) rotate(4deg); }
+  100% { transform: translateY(0) scale(1) rotate(0deg); }
+}
+
+/* Elegant name badge (cleaner than glow/shimmer) */
+#name.name-badge {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.25em;
+  white-space: nowrap;
+  background: rgba(255,255,255,0.96);
+  padding: 0.28em 0.6em;
+  border-radius: 12px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+  border: 1px solid rgba(0,0,0,0.06);
+  font-family: 'Lobster', cursive !important; /* distinct look for the name */
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+#name.name-badge::after {
+  content: "";
+  position: absolute;
+  left: 10px; right: 10px; bottom: 6px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(231,84,128,0.45), transparent);
+  border-radius: 999px;
+  opacity: 0.85;
+}
+#name.name-badge .name-gradient-text {
+  background-image: linear-gradient(100deg, #e75480 0%, #ff9ac3 55%, #a18cd1 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.4px rgba(0,0,0,0.14);
+}
+/* In clean mode, prefer solid text instead of gradient */
+body.clean #name.name-badge .name-gradient-text {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  -webkit-text-stroke: 0 !important;
+}

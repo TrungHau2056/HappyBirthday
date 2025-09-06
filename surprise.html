@@ -4,11 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎉 Surprise! 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 20px;
-      font-family: 'Poppins', sans-serif;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       background: radial-gradient(circle at center, #ffbae1, #ff4fba);
       color: white;
       text-align: center;
@@ -18,6 +19,9 @@
       justify-content: center;
       align-items: center;
       overflow-x: hidden;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     h1 {
@@ -38,28 +42,26 @@
       height: 360px;
       border: none;
       border-radius: 12px;
-
-        /* Clickable letters like the opening: press to bounce */
-        .click-letters {
-          display: inline-block;
-          white-space: pre-wrap;
-        }
-        .click-letters .letter {
-          display: inline-block;
-          cursor: pointer;
-          user-select: none;
-          transition: transform 180ms ease, color 180ms ease, text-shadow 180ms ease;
-          will-change: transform;
-        }
-        .click-letters .letter:hover { transform: translateY(-2px) scale(1.06); }
-        .click-letters .letter.pop { animation: letterPop 520ms cubic-bezier(.2,.9,.2,1.1); }
-        @keyframes letterPop {
-          0% { transform: translateY(0) scale(1) rotate(0deg); }
-          35% { transform: translateY(-6px) scale(1.25) rotate(-8deg); }
-          70% { transform: translateY(2px) scale(0.96) rotate(4deg); }
-          100% { transform: translateY(0) scale(1) rotate(0deg); }
       box-shadow: 0 0 20px rgba(0,0,0,0.2);
       margin-bottom: 30px;
+    }
+
+    /* Clickable letters like the opening: press to bounce */
+    .click-letters { display: inline-block; white-space: pre-wrap; }
+    .click-letters .letter {
+      display: inline-block;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 180ms ease, color 180ms ease, text-shadow 180ms ease;
+      will-change: transform;
+    }
+    .click-letters .letter:hover { transform: translateY(-2px) scale(1.06); }
+    .click-letters .letter.pop { animation: letterPop 520ms cubic-bezier(.2,.9,.2,1.1); }
+    @keyframes letterPop {
+      0% { transform: translateY(0) scale(1) rotate(0deg); }
+      35% { transform: translateY(-6px) scale(1.25) rotate(-8deg); }
+      70% { transform: translateY(2px) scale(0.96) rotate(4deg); }
+      100% { transform: translateY(0) scale(1) rotate(0deg); }
     }
 
     .back-link {
@@ -106,9 +108,8 @@
 </head>
 <body>
     
-  <h1>🎁 Surprise Time! 🎁</h1>
+  <h1 id="surpriseTitle" class="click-letters">🎁 Surprise Time! 🎁</h1>
   <p>Here's your surprise video! Hope it brings a big smile to your face. You deserve all the happiness today and always. 💖</p>
-    <h1 id="surpriseTitle" class="click-letters">🎁 Surprise Time! 🎁</h1>
 
   <iframe 
   id="ytplayer"
@@ -118,8 +119,6 @@
   allow="autoplay; encrypted-media" 
   allowfullscreen>
 </iframe>
-
-
 
 
   <a href="index.html" class="back-link">← Back to Main Page</a>
@@ -135,26 +134,28 @@
       document.body.appendChild(confetti);
     }
   </script>
-      // Split heading into clickable letters that bounce on press
-      (function(){
-        const title = document.getElementById('surpriseTitle');
-        if (!title) return;
-        const original = title.textContent;
-        title.textContent = '';
-        for (const ch of original) {
-          const span = document.createElement('span');
-          span.className = 'letter';
-          span.textContent = ch;
-          span.addEventListener('click', () => {
-            span.classList.remove('pop');
-            // force reflow to restart animation
-            // eslint-disable-next-line no-unused-expressions
-            span.offsetHeight;
-            span.classList.add('pop');
-          });
-          title.appendChild(span);
-        }
-      })();
+  <script>
+    // Split heading into clickable letters that bounce on press
+    (function(){
+      const title = document.getElementById('surpriseTitle');
+      if (!title) return;
+      const original = title.textContent;
+      title.textContent = '';
+      for (const ch of original) {
+        const span = document.createElement('span');
+        span.className = 'letter';
+        span.textContent = ch;
+        span.addEventListener('click', () => {
+          span.classList.remove('pop');
+          // force reflow to restart animation
+          // eslint-disable-next-line no-unused-expressions
+          span.offsetHeight;
+          span.classList.add('pop');
+        });
+        title.appendChild(span);
+      }
+    })();
+  </script>
   <script>
     // Load YouTube Iframe API
     var tag = document.createElement('script');

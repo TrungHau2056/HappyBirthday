@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Happy Birthday</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-color: #0e0e2c;
@@ -22,11 +22,14 @@
 
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       background: var(--bg-color);
       color: var(--text-color);
       transition: background 0.5s ease;
       overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
     }
 
     html, body {
@@ -77,23 +80,78 @@
     }
 
     .hero h2 {
-      font-size: 2rem;
+      font-size: clamp(1.6rem, 4.5vw, 2.4rem);
       margin: 0;
-      font-family: 'Pacifico', cursive;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-color);
+      text-shadow: none;
     }
 
     .hero h1 {
-      font-size: 3rem;
-      color: white;
-      text-shadow: 3px 3px #48cfff;
+      font-size: clamp(2.2rem, 6vw, 3.2rem);
+      color: var(--text-color);
       margin: 10px 0;
-      font-family: 'Pacifico', cursive;
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.08;
+      text-shadow: none;
+  white-space: nowrap;
+  display: inline-block;
+  max-width: 94vw;
+    }
+
+    /* Fancy color + motion effects for special text */
+    .fx-word, .fx-name {
+      background-image: linear-gradient(120deg, #ff6ec4 0%, #7873f5 50%, #48c6ef 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 6s ease-in-out infinite;
+      -webkit-text-stroke: 0.6px rgba(0,0,0,0.15);
+    }
+    .fx-name {
+      background-image: linear-gradient(120deg, #ff9a9e 0%, #fecfef 20%, #a18cd1 60%, #48c6ef 100%);
+      text-shadow: 0 2px 14px rgba(255, 110, 196, 0.25);
+    }
+    .fx-word:hover, .fx-name:hover { transform: translateY(-2px) scale(1.02); transition: transform 160ms ease; }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* Subtle shimmer sweep over the whole heading */
+    .fx-shimmer { position: relative; isolation: isolate; }
+    .fx-shimmer::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.25) 22%, transparent 34%);
+      background-size: 220% 220%;
+      mix-blend-mode: screen;
+      animation: shimmerSweep 3.8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes shimmerSweep {
+      0% { background-position: -60% -60%; opacity: 0.6; }
+      50% { opacity: 0.35; }
+      100% { background-position: 160% 160%; opacity: 0.6; }
     }
 
     .hero p {
       max-width: 600px;
       margin: 20px auto;
     }
+    
+  /* Minimal start: hide non-essential bits at first */
+  body.minimal-start .navbar nav a { display: none; }
+  body.minimal-start .hero p { display: none; }
+  body.minimal-start .message-box { display: none; }
+  body.minimal-start .animated-cake { display: none; }
 
     .btn {
       display: inline-block;
@@ -111,7 +169,7 @@
       background: var(--button-hover);
     }
 
-    .countdown {
+  .countdown {
       margin-top: 20px;
       font-size: 1.25rem;
       font-weight: bold;
@@ -195,8 +253,7 @@
         font-size: 1rem;
       }
     }
-    /* Readability backgrounds for key text areas */
-    .hero h1,
+  /* Readability backgrounds for key text areas (exclude h1 to show gradient text) */
     .hero h2,
     .hero p,
     .countdown,
@@ -214,14 +271,14 @@
     }
   </style>
 </head>
-<body>
+<body class="minimal-start">
   <audio id="bgMusic" class="song" loop autoplay>
     <source src="./music/Ladyfingers.mp3" type="audio/mp3">
     Your browser isn't invited for super fun audio time.
   </audio>
 
   <div class="navbar">
-    <span class="logo">• Yashvinthan</span>
+    <span class="logo">• Trần Hải Yến</span>
     <nav>
       <a href="#">Home</a>
       <a href="surprise.html">surprise</a>
@@ -229,20 +286,40 @@
   </div>
 
   <main class="hero">
-    <h2>HAPPY</h2>
-    <h1>BIRTHDAY name!</h1>
-    <p>Wishing you joy, laughter, and everything you love. Enjoy your special day to the fullest!</p>
+  <h1 class="fx-shimmer"><span class="fx-word">HAPPY</span> <span class="fx-word">BIRTHDAY</span> <span class="fx-name">Trần Hải Yến!</span></h1>
+    <p class="dob" style="font-size:0.95rem; opacity:0.9;">(Sinh nhật: 07/09/2005)</p>
+    <p>Chúc bạn một ngày thật vui và tràn đầy năng lượng!</p>
     <div class="countdown" id="countdown"></div>
-    <a href="#" class="btn" id="goNowBtn" style="pointer-events: none; opacity: 0.5;">GO NOW</a>
+    <a href="#" class="btn" id="goNowBtn" style="pointer-events: none; opacity: 0.5;">VÀO NGAY</a>
     <div class="message-box">
-      <p>🎁 From Yash: "Happy Birthday name Wishing you an amazing year ahead!"</p>
-      <p>When you feel sad Remember that you have Me, ok? I may not be Much but I will always be By your side.</p>
+      <p>🎁 Gửi Yến: Chúc mừng sinh nhật! Chúc bạn một năm rực rỡ và nhiều niềm vui.</p>
+      <p>Khi mệt mỏi hãy nhớ luôn có người ở bên. Chúc Yến luôn hạnh phúc và bình an.</p>
     </div>
   </main>
 
   <img src="cake.gif" alt="Animated Cake" class="animated-cake" />
 
   <script>
+    // Keep the main heading on one line by shrinking font-size if needed
+    (function(){
+      const h1 = document.querySelector('.hero h1');
+      if (!h1) return;
+      function fitOnce() {
+        // reset size to computed value from CSS
+        h1.style.fontSize = '';
+        const parent = h1.parentElement || document.body;
+        const maxWidth = Math.min(window.innerWidth * 0.94, parent.clientWidth * 0.96 || window.innerWidth * 0.94);
+        let fs = parseFloat(getComputedStyle(h1).fontSize) || 32;
+        let guard = 48;
+        while (h1.scrollWidth > maxWidth && fs > 16 && guard-- > 0) {
+          fs -= 1;
+          h1.style.fontSize = fs + 'px';
+        }
+      }
+      window.addEventListener('load', fitOnce);
+      window.addEventListener('resize', () => { setTimeout(fitOnce, 50); });
+    })();
+
     function launchFirework() {
       const fireworkCount = 20;
       for (let i = 0; i < fireworkCount; i++) {
@@ -278,15 +355,25 @@
       document.body.classList.toggle('dark-mode');
     }
 
-    const targetDate = new Date("2025-04-01T00:00:00").getTime();
+    function getNextBirthdayTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      // Tháng 9 (September) là 8
+      const next = new Date(year, 8, 7, 0, 0, 0, 0);
+      if (now > next) next.setFullYear(year + 1);
+      return next.getTime();
+    }
+const targetDate = getNextBirthdayTime();
 const countdownEl = document.getElementById("countdown");
+const goNowBtn = document.getElementById("goNowBtn");
 
 const interval = setInterval(() => {
   const now = new Date().getTime();
   const distance = targetDate - now;
 
   if (distance <= 0) {
-    countdownEl.innerHTML = "🎉 It's your birthday! 🎉";
+    document.body.classList.remove('minimal-start');
+  countdownEl.innerHTML = "🎉 Tới sinh nhật rồi! 🎉";
     clearInterval(interval); // Stop the countdown
 
     // Activate the button
@@ -309,7 +396,7 @@ const interval = setInterval(() => {
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  countdownEl.innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  countdownEl.innerHTML = `Đếm ngược: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 }, 1000);
   </script>
   <script>
