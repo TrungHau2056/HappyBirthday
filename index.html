@@ -290,7 +290,7 @@
     <p class="dob" style="font-size:0.95rem; opacity:0.9;">(Sinh nhật: 07/09/2005)</p>
     <p>Chúc bạn một ngày thật vui và tràn đầy năng lượng!</p>
     <div class="countdown" id="countdown"></div>
-    <a href="#" class="btn" id="goNowBtn" style="pointer-events: none; opacity: 0.5;">VÀO NGAY</a>
+  <a href="birthday.html" class="btn" id="goNowBtn">VÀO NGAY</a>
     <div class="message-box">
       <p>🎁 Gửi Yến: Chúc mừng sinh nhật! Chúc bạn một năm rực rỡ và nhiều niềm vui.</p>
       <p>Khi mệt mỏi hãy nhớ luôn có người ở bên. Chúc Yến luôn hạnh phúc và bình an.</p>
@@ -367,13 +367,17 @@ const targetDate = getNextBirthdayTime();
 const countdownEl = document.getElementById("countdown");
 const goNowBtn = document.getElementById("goNowBtn");
 
+// Luôn cho phép nút chuyển hướng sang birthday.html để kiểm tra
+goNowBtn.style.pointerEvents = "auto";
+goNowBtn.style.opacity = "1";
+
 const interval = setInterval(() => {
   const now = new Date().getTime();
   const distance = targetDate - now;
 
   if (distance <= 0) {
     document.body.classList.remove('minimal-start');
-  countdownEl.innerHTML = "🎉 Tới sinh nhật rồi! 🎉";
+    countdownEl.innerHTML = "🎉 Tới sinh nhật rồi! 🎉";
     clearInterval(interval); // Stop the countdown
 
     // Activate the button
