@@ -366,12 +366,8 @@
     }
 
     function getNextBirthdayTime() {
-      const now = new Date();
-      const year = now.getFullYear();
-      // Tháng 9 (September) là 8
-      const next = new Date(year, 8, 7, 0, 0, 0, 0);
-      if (now > next) next.setFullYear(year + 1);
-      return next.getTime();
+      // Đếm ngược 10 phút từ khi mở trang
+      return new Date().getTime() + 10 * 60 * 1000;
     }
 const targetDate = getNextBirthdayTime();
 const countdownEl = document.getElementById("countdown");
@@ -401,12 +397,9 @@ const interval = setInterval(() => {
     return;
   }
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const minutes = Math.floor(distance / (1000 * 60));
   const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  countdownEl.innerHTML = `Đếm ngược: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  countdownEl.innerHTML = `Đếm ngược: ${minutes} phút ${seconds} giây`;
 }, 1000);
   </script>
   <script>
