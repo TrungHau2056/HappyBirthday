@@ -25,13 +25,42 @@ const animationTimeline = () => {
     const textBoxChars = document.getElementsByClassName("hbd-chatbox")[0];
     const hbd = document.getElementsByClassName("wish-hbd")[0];
 
-    textBoxChars.innerHTML = `<span>${textBoxChars.innerHTML
-        .split("")
-        .join("</span><span>")}</span>`;
+    // Split element content into spans per character while preserving <br> and inline elements
+    function splitIntoSpans(node) {
+        const frag = document.createDocumentFragment();
+        node.childNodes.forEach(child => {
+            if (child.nodeType === Node.TEXT_NODE) {
+                const text = child.textContent;
+                for (const ch of text) {
+                    if (ch === '\n') {
+                        frag.appendChild(document.createElement('br'));
+                    } else {
+                        const span = document.createElement('span');
+                        span.textContent = ch;
+                        frag.appendChild(span);
+                    }
+                }
+            } else if (child.nodeType === Node.ELEMENT_NODE) {
+                if (child.tagName === 'BR') {
+                    frag.appendChild(document.createElement('br'));
+                } else {
+                    const clone = child.cloneNode(false);
+                    clone.appendChild(splitIntoSpans(child));
+                    frag.appendChild(clone);
+                }
+            }
+        });
+        return frag;
+    }
 
-    hbd.innerHTML = `<span>${hbd.innerHTML
-        .split("")
-        .join("</span><span>")}</span>`;
+    // Replace content with spanned characters (preserve <br> and inline tags)
+    const chatClone = textBoxChars.cloneNode(true);
+    textBoxChars.innerHTML = '';
+    textBoxChars.appendChild(splitIntoSpans(chatClone));
+
+    const hbdClone = hbd.cloneNode(true);
+    hbd.innerHTML = '';
+    hbd.appendChild(splitIntoSpans(hbdClone));
 
     const ideaTextTrans = {
         opacity: 0,
@@ -259,14 +288,34 @@ const animationTimeline = () => {
     .to(
         ".last-smile",
         0.5, {
-            rotation: 90,
+            rotation: 0,
+            y: 0,
+            opacity: 1,
+            transformOrigin: 'center center'
         },
         "+=1"
-    );
+    )
+    // Seamlessly continue to the surprise page after a short pause
+    .call(function(){
+        setTimeout(function(){
+            // Only auto-redirect if user hasn't clicked the surprise link yet
+            if (!window.__wentToSurprise) {
+                window.location.href = 'surprise.html';
+            }
+        }, 2500);
+    });
 
     // Restart Animation on click
     const replyBtn = document.getElementById("replay");
-    replyBtn.addEventListener("click", () => {
-        tl.restart();
-    });
+    if (replyBtn) {
+        replyBtn.addEventListener("click", (e) => {
+            // If clicking the anchor link inside, allow navigation to surprise
+            const link = e.target && e.target.closest('a[href]');
+            if (link) {
+                window.__wentToSurprise = true;
+                return; // let the browser follow the link
+            }
+            tl.restart();
+        });
+    }
 }

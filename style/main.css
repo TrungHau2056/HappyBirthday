@@ -1,10 +1,19 @@
-html {
+html, body {
   box-sizing: border-box;
+  height: 100%;
+  overflow: hidden; /* prevent scrolling, keep content within viewport */
 }
 
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
+}
+
+/* Make main container text match the name styling: Pacifico + pink + soft glow */
+.container, .container * {
+  font-family: 'Pacifico', cursive !important;
+  color: #e75480 !important;
+  text-shadow: 2px 2px 8px #fff0f6 !important;
 }
 
 .song {
@@ -19,6 +28,9 @@ body {
   text-align: center;
   visibility: hidden;
   width: 100vw;
+  transform-origin: top center;
+  transition: transform 260ms ease;
+  z-index: 999; /* keep main content above decorative backgrounds */
 }
 
 .container > div {
@@ -80,6 +92,9 @@ body {
   border-radius: 3px;
   display: inline-block;
   padding: 3px 5px;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
 }
 
 .five .idea-5 {
@@ -98,7 +113,7 @@ body {
 .six {
   position: relative;
   top: 10vh;
-  z-index: 1;
+  z-index: 10; /* raise above decorative layers */
 }
 
 .six img {
@@ -108,12 +123,51 @@ body {
   /* height: auto; */
 }
 
-.six .hat {
-  left: 41.5%;
+/* Ensure the profile picture (which may have a transparent background) shows on a neutral backing
+   so the animated site background doesn't show through. Keep it above floating photos. */
+.profile-picture {
+  /* preserve transparency of the PNG/WebP that has its background removed */
+  background: transparent;
+  border-radius: 12px;
+  box-shadow: none;
+  position: relative;
+  z-index: 11; /* above floating photos, below the hat */
+  object-fit: cover;
+  display: inline-block;
+  outline: 2px dashed rgba(231, 84, 128, 0.35); /* helper to adjust; remove if not needed */
+}
+
+.gallery-main {
+  position: relative;
+  display: inline-block;
+}
+
+.gallery-main .profile-picture {
+  display: block;
+  margin: 0 auto;
+}
+
+.gallery-main .hat {
   position: absolute;
-  /* transform: scale(0.1); */
-  top: -35%;
-  width: 80px;
+  left: 54%;
+  top: 36%; /* sit over the head area */
+  /* move right ~20% of hat width, up ~70% of hat height */
+  transform: translate(-30%, -70%) rotate(-12deg);
+  width: 28%; /* relative to profile image width */
+  max-width: 140px;
+  height: auto;
+  z-index: 3; /* above the profile image */
+  pointer-events: none;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+}
+
+@media (max-width: 700px) {
+  .gallery-main .hat {
+    top: 30%;
+    width: 32%;
+  /* same offset logic on mobile */
+  transform: translate(-30%, -70%) rotate(-10deg);
+  }
 }
 
 .baloons img {
@@ -220,6 +274,17 @@ body {
   font-weight: lighter;
 }
 
+/* Ensure the final line doesn't rotate or stack; keep it centered and constrained */
+.last-smile {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 88vw;
+  margin: 0 auto;
+  transform: none !important;
+}
+
 #replay {
   cursor: pointer;
   z-index: 3;
@@ -290,3 +355,91 @@ body {
     font-weight: lighter;
   }
 }
+
+/* Mobile / small-screen adjustments: stack content, reduce sizes so everything fits */
+@media screen and (max-width: 700px) {
+  .container {
+    height: auto;
+    visibility: visible;
+    overflow-y: auto;
+    padding: 4vh 4vw;
+    width: 100vw;
+  }
+
+  /* Make each section flow normally instead of absolute positioning */
+  .container > div {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin: 1.2rem 0;
+  }
+
+  h1.one { font-size: 2rem; line-height: 1.15; }
+  .two { font-size: 1rem; }
+  .three { font-size: 1.2rem; }
+  .five p { position: static; font-size: 1.25rem; }
+  .idea-5 { font-size: 2.2rem; }
+  .idea-6 span { font-size: 6rem; }
+  .six img { height: 200px; }
+
+  /* Reduce gallery photo size on small screens */
+  .gallery-photo { width: 110px; height: 110px; border-radius: 12px; }
+
+  /* Keep floating background photos but reduce their max size for phones */
+  .floating-photo { max-width: 120px; max-height: 120px; }
+}
+
+/* Show a gentle rotate-to-landscape overlay on portrait mobile to encourage horizontal viewing */
+.rotate-tip {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  z-index: 20000;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+}
+.rotate-tip .box {
+  background: rgba(255,255,255,0.06);
+  padding: 1rem 1.4rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+
+@media screen and (max-width: 700px) and (orientation: portrait) {
+  .rotate-tip { display: flex; }
+  /* optionally hide main content behind the tip so user rotates */
+  .container { display: none; }
+}
+
+/* Subtle site background image (uses image from /img/) */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url('../img/background.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.3; /* slightly more visible but still translucent */
+  filter: saturate(1.05) blur(1px);
+  transform-origin: center center;
+  z-index: 0; /* below stardust and floating photos */
+  will-change: transform, opacity;
+  animation: bgDrift 28s ease-in-out infinite;
+}
+
+@keyframes bgDrift {
+  0% { transform: scale(1) translate(0,0); opacity: 0.14; }
+  50% { transform: scale(1.03) translate(-1.2%, -1.2%); opacity: 0.17; }
+  100% { transform: scale(1) translate(0,0); opacity: 0.14; }
+}
+
+/* Ensure layering: site-bg (0) < body::before (1) < floating-gallery (2) < container (9999) */
+body::before { z-index: 1; }
+.floating-gallery { z-index: 2; }

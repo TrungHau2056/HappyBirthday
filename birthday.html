@@ -8,38 +8,68 @@
   <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
   <title>Happy Birthday!!! :)</title>
   <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Pacifico&family=Lobster&display=swap" rel="stylesheet">
   <!-- My Style -->
   <link rel="stylesheet" href="./style/main.css" />
 </head>
 
 <body>
 
+        <!-- Rotate tip for portrait mobile devices -->
+        <div class="rotate-tip" role="dialog" aria-hidden="true">
+            <div class="box">
+                <h3 style="margin:0 0 .5rem; font-size:1.2rem;">Quay máy sang ngang để xem tốt hơn</h3>
+                <p style="margin:0; opacity:0.9;">Vui lòng xoay màn hình sang chế độ ngang (landscape) để trải nghiệm tốt nhất.</p>
+            </div>
+        </div>
+
+        <!-- Site background image (subtle, animated) -->
+        <div class="site-bg" aria-hidden="true"></div>
+
     <audio id="bgMusic" class="song" loop autoplay>
         <source src="./music/Anthony Lazaro & Matthew Ifield . Another You.mp3" type="audio/mp3">
         Your browser isn't invited for super fun audio time.
       </audio>
       
+    <!-- floating photos as background layer -->
+    <div class="floating-gallery" aria-hidden="true">
+        <img src="img/1.jpg" class="floating-photo" alt="Ảnh 1" />
+        <img src="img/2.jpg" class="floating-photo" alt="Ảnh 2" />
+        <img src="img/3.jpg" class="floating-photo" alt="Ảnh 3" />
+        <img src="img/4.jpg" class="floating-photo" alt="Ảnh 4" />
+        <img src="img/5.jpg" class="floating-photo" alt="Ảnh 5" />
+        <img src="img/6.jpg" class="floating-photo" alt="Ảnh 6" />
+        <img src="img/7.jpg" class="floating-photo" alt="Ảnh 7" />
+    </div>
 
     <div class="container">
-        <div class="one">
-            <h1 class="one">
-                Hi
-                <span id="name">name</span>
+                <div class="one">
+            <h1 class="one" style="margin: 0; line-height: 1.25;">
+                <span style="display:inline-block; background:rgba(255,255,255,0.95); color:#333; padding:0.35rem 0.6rem; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.08);">
+                    Chào mừng sinh nhật đặc biệt của
+                </span><br>
+                <span id="name" style="display:inline-block; margin-top:0.25em; white-space:nowrap; background:rgba(255,255,255,0.95); padding:0.25em 0.5em; border-radius:10px; box-shadow:0 8px 20px rgba(0,0,0,0.08); font-family: 'Pacifico', cursive; color: #e75480; font-size: 2.5em; text-shadow: 2px 2px 8px #fff0f6;">Trần Hải Yến</span>
             </h1>
-            <p class="two" id="greetingText">I really like your name btw!</p>
-        </div>
+                        <p class="two" id="greetingText" style="font-family: 'Lobster', cursive; color: #ff69b4; font-size: 1.2em; line-height:1.4;">
+                            Chúc Yến một tuổi mới tràn đầy niềm vui, sức khỏe và những điều đẹp đẽ. Mong mọi ước mơ của bạn dần trở thành hiện thực và mỗi ngày đều đáng nhớ.
+                            <br><span style="font-size:0.9em; color:#888;">(Sinh nhật: 07/09/2005)</span>
+                        </p>
+                </div>
 
         <div class="three">
-            <p>It's your birthday!! :D</p>
+            <p>Hôm nay là ngày của bạn — hãy tỏa sáng và tận hưởng từng khoảnh khắc!</p>
         </div>
 
         <div class="four">
-            <div class="text-box">
-                <p class="hbd-chatbox">
-                Happy birthday to youu!! Wishing you an amazing year ahead! blah blah blah blah blah blah blah blah blah blah blah blah .
+            <div class="text-box" style="background: rgba(255,255,255,0.95); border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); display: inline-block; border: 1px solid rgba(0,0,0,0.06);">
+                <p class="hbd-chatbox" style="font-family: 'Pacifico', cursive; color: #e75480; font-size: 1.25em; text-shadow: 1px 1px 6px #fff0f6; line-height:1.5;">
+                Ngày hôm nay là dịp để nhìn lại những kỷ niệm đẹp và hướng về những điều tốt đẹp phía trước. Chúc Yến luôn giữ được nụ cười, gặp thật nhiều may mắn, và có một năm ngập tràn yêu thương.<br>
+                Hãy ăn bánh, quẩy thật đã và nhớ rằng bạn luôn có những người bạn thương yêu bên cạnh. 🎂🎉💖
+                </p>
+                <p class="surprise-hint" style="margin: 8px 0 0; font-family: 'Poppins', sans-serif; color:#333; font-size: 0.95em; display:none; opacity:0; transition: opacity .4s ease;">
+                    nếu muốn nhận một món quà bất ngờ thì <a href="surprise.html" style="color:#e75480; text-decoration: underline; font-weight:600;">nhấn vào chữ này</a>
                 </p>
                 <p class="fake-btn">Send</p>
             </div>
@@ -65,11 +95,18 @@
         </div>
 
         <div class="six">
-            <img src="./img/image.jpg" alt="profile" class="profile-picture" id="imagePath"/>
-            <img src="img/hat.svg" alt="hat" class="hat" />
+            <div class="gallery-main">
+                <img src="img/image.jpg" alt="profile" class="profile-picture" id="imagePath"/>
+                <img src="img/hat.svg" alt="hat" class="hat" />
+                <div class="gallery-photos">
+                </div>
+            </div>
+            <!-- floating-gallery moved to page root to act as background -->
+                </div>
+            </div>
             <div class="wish">
-                <h3 class="wish-hbd">Happy Birthday!</h3>
-                <h5 id="wishText">May the js.prototypes always be with you! ;)</h5>
+                <h3 class="wish-hbd" style="font-family: 'Pacifico', cursive; color: #e75480; font-size: 2em; text-shadow: 2px 2px 8px #fff0f6;">Chúc mừng sinh nhật, Yến!</h3>
+                <h5 id="wishText" style="font-family: 'Lobster', cursive; color: #ff69b4; font-size: 1.15em;">Một lời chúc ấm áp: luôn khỏe mạnh, vui vẻ và dũng cảm theo đuổi ước mơ của mình. Mãi là nguồn cảm hứng cho mọi người xung quanh.</h5>
             </div>
         </div>
 
@@ -141,24 +178,210 @@
             </svg>
         </div>
 
-        <div class="nine">
-            <p>Okay, now come back and tell me if you liked it.</p>
-            <p id="replay">
-                <a href="surprise.html" style="color: rgb(0, 0, 0); text-decoration: underline;">Or click, if you want surprise gift.</a>
-              </p>              
-            <p class="last-smile">:)</p>
-        </div>
+                <div class="nine">
+                        <p>Bạn đã xem xong rồi — hy vọng Yến thích món quà nhỏ này.</p>
+                        <p id="replay">
+                                <a href="surprise.html" style="color: rgb(0, 0, 0); text-decoration: underline;">Nhấn vào đây để nhận món quà bất ngờ.</a>
+                            </p>
+                        <p class="last-smile">Chúc bạn một ngày thật tuyệt vời! 🎈</p>
+                </div>
     </div>
     <script>
         const bgMusic = document.getElementById("bgMusic");
         bgMusic.volume = 0.1; // Set the volume (0 = silent, 1 = full volume)
       </script>
+            <script>
+                // Ensure .container fits within one viewport by scaling when necessary
+                    (function(){
+                        const container = document.querySelector('.container');
+                        const rotateTip = document.querySelector('.rotate-tip');
+                        if(!container) return;
+
+                        // Reference logical CSS size for iPhone 14 Pro Max in landscape (approx)
+                        const IPHONE14_LANDSCAPE = { w: 932, h: 430 };
+
+                        function isLikelyPhone() {
+                            // simple checks: touch-capable or narrow viewport
+                            return ('ontouchstart' in window) || Math.max(window.innerWidth, window.innerHeight) <= 1100;
+                        }
+
+                        function updateRotateTip() {
+                            if(!rotateTip) return;
+                            // show tip when device is in portrait (height > width)
+                            if(window.innerHeight > window.innerWidth) {
+                                rotateTip.setAttribute('aria-hidden', 'false');
+                                rotateTip.style.display = 'flex';
+                            } else {
+                                rotateTip.setAttribute('aria-hidden', 'true');
+                                rotateTip.style.display = 'none';
+                            }
+                        }
+
+                        function fit() {
+                            // reset transform
+                            container.style.transform = '';
+                            const rect = container.getBoundingClientRect();
+
+                            // If on a phone or small device, prefer to fit to an iPhone14ProMax-landscape reference
+                            if(isLikelyPhone()) {
+                                // use the larger of actual content and the reference as target
+                                const targetW = Math.max(rect.width, IPHONE14_LANDSCAPE.w);
+                                const targetH = Math.max(rect.height, IPHONE14_LANDSCAPE.h);
+                                // compute scale to fit that target into the available viewport
+                                const scale = Math.min(window.innerWidth / targetW, window.innerHeight / targetH, 1);
+                                if(scale < 1) {
+                                    container.style.transform = `scale(${scale})`;
+                                    container.style.transformOrigin = 'top left';
+                                }
+                            } else {
+                                // Desktop/tablet: only scale down vertically if content overflows viewport height
+                                const rectH = rect.height;
+                                const vwH = window.innerHeight;
+                                if(rectH > vwH) {
+                                    const scale = Math.max(0.6, vwH / rectH);
+                                    container.style.transform = `scale(${scale})`;
+                                    container.style.transformOrigin = 'top left';
+                                }
+                            }
+                        }
+
+                        window.addEventListener('resize', () => { updateRotateTip(); fit(); });
+                        window.addEventListener('orientationchange', () => { updateRotateTip(); setTimeout(fit, 80); });
+                        // run after images/fonts load
+                        window.addEventListener('load', () => { updateRotateTip(); setTimeout(fit, 120); });
+                        // also attempt early
+                        setTimeout(() => { updateRotateTip(); fit(); }, 300);
+                    })();
+            </script>
       
 </body>
-    <!-- Greensock -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-    <!-- Sweetalert -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type="application/javascript" src="./script/main.js"></script>
+        <!-- Greensock -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+        <!-- Sweetalert -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="application/javascript" src="./script/main.js"></script>
+        <script>
+        // Hiển thị gợi ý quà bất ngờ sau khi ảnh profile xuất hiện trong khung nhìn
+        (function(){
+            const hint = document.querySelector('.surprise-hint');
+            const img = document.querySelector('.profile-picture');
+            if(!hint || !img) return;
+
+            function showHint(){
+                if(hint.dataset.shown === '1') return; // prevent duplicate
+                hint.dataset.shown = '1';
+                hint.style.display = 'block';
+                requestAnimationFrame(() => { hint.style.opacity = '1'; });
+            }
+
+            if('IntersectionObserver' in window){
+                const io = new IntersectionObserver((entries) => {
+                    for (const e of entries){
+                        if(e.isIntersecting){
+                            showHint();
+                            io.disconnect();
+                            break;
+                        }
+                    }
+                }, { threshold: 0.25 });
+                io.observe(img);
+            } else {
+                // Fallback: show after image load
+                if(img.complete){
+                    setTimeout(showHint, 300);
+                } else {
+                    img.addEventListener('load', () => setTimeout(showHint, 300));
+                }
+            }
+        })();
+        </script>
+        <script>
+        // Hiệu ứng chuyển động linh hoạt cho các ảnh (giữ trong khung hình)
+        document.addEventListener('DOMContentLoaded', function() {
+            const photos = document.querySelectorAll('.floating-photo');
+            const margin = 8; // khoảng cách an toàn với mép khung hình
+
+            // Kích thước khung hình hiện tại (viewport)
+            let vw = window.innerWidth;
+            let vh = window.innerHeight;
+
+            function updateViewport() {
+                vw = window.innerWidth;
+                vh = window.innerHeight;
+            }
+
+            function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+
+            function placeInside(img) {
+                const w = parseFloat(img.dataset.w) || img.offsetWidth || 100;
+                const h = parseFloat(img.dataset.h) || img.offsetHeight || 100;
+                const left = clamp(parseFloat(img.style.left) || Math.random() * (vw - w - margin*2) + margin, margin, Math.max(margin, vw - w - margin));
+                const top = clamp(parseFloat(img.style.top) || Math.random() * (vh - h - margin*2) + margin, margin, Math.max(margin, vh - h - margin));
+                img.style.left = left + 'px';
+                img.style.top = top + 'px';
+            }
+
+            photos.forEach((img) => {
+                img.style.position = 'fixed';
+                img.style.borderRadius = '12px';
+                img.style.zIndex = 0;
+                img.style.boxShadow = '0 4px 16px rgba(255, 105, 180, 0.15)';
+                img.onload = () => {
+                    const naturalW = img.naturalWidth;
+                    const naturalH = img.naturalHeight;
+                    const ratio = naturalW / naturalH || 1;
+                    const maxDim = (vw < 600 ? 90 : 140) * 1.5;
+                    let w = naturalW;
+                    let h = naturalH;
+                    if (w > maxDim) { w = maxDim; h = Math.round(w / ratio); }
+                    if (h > maxDim) { h = maxDim; w = Math.round(h * ratio); }
+                    img.style.width = w + 'px';
+                    img.style.height = h + 'px';
+                    img.dataset.w = w;
+                    img.dataset.h = h;
+                    placeInside(img);
+                };
+                if (img.complete) img.onload();
+            });
+
+            // Vận tốc theo trục X, Y cho từng ảnh (ổn định, không ngẫu nhiên mỗi frame)
+            const vel = Array.from({ length: photos.length }, () => ({
+                dx: (Math.random() > 0.5 ? 1 : -1) * (0.6 + Math.random() * 1.6),
+                dy: (Math.random() > 0.5 ? 1 : -1) * (0.6 + Math.random() * 1.6)
+            }));
+
+            function tick() {
+                // cập nhật khung hình mỗi frame để luôn đúng khi resize/thanh trình duyệt thay đổi
+                updateViewport();
+                photos.forEach((img, i) => {
+                    let left = parseFloat(img.style.left) || 0;
+                    let top = parseFloat(img.style.top) || 0;
+                    const w = parseFloat(img.dataset.w) || img.offsetWidth || 100;
+                    const h = parseFloat(img.dataset.h) || img.offsetHeight || 100;
+                    let { dx, dy } = vel[i];
+
+                    // Kiểm tra va chạm mép và đảo chiều
+                    if (left + dx < margin || left + dx > (vw - w - margin)) { vel[i].dx = dx = -dx; }
+                    if (top + dy < margin || top + dy > (vh - h - margin)) { vel[i].dy = dy = -dy; }
+
+                    left = clamp(left + dx, margin, Math.max(margin, vw - w - margin));
+                    top = clamp(top + dy, margin, Math.max(margin, vh - h - margin));
+                    img.style.left = left + 'px';
+                    img.style.top = top + 'px';
+                });
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+
+            // Khi resize/orientation change, cập nhật lại viewport và ép các ảnh về trong khung
+            window.addEventListener('resize', () => {
+                updateViewport();
+                photos.forEach(placeInside);
+            });
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => { updateViewport(); photos.forEach(placeInside); }, 80);
+            });
+        });
+        </script>
 
 </html>
