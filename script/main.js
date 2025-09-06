@@ -1,13 +1,16 @@
 // trigger to play music in the background with sweetalert
 window.addEventListener('load', () => {
+    // Mark prompt active to hide unnecessary text until user decides
+    document.body.classList.add('prompt-active');
     Swal.fire({
-        title: 'Do you want to play music in the background?',
-        icon: 'warning',
+        title: 'Bật nhạc hài hước không? 🎵',
+        text: 'Nghe cho vui tai, không thích thì tắt liền!',
+        icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes',
-        cancelButtonText: 'No',
+        cancelButtonColor: '#aaa',
+        confirmButtonText: 'Bật đi',
+        cancelButtonText: 'Để sau',
     }).then((result) => {
         if (result.isConfirmed) {
             document.querySelector('.song').play();
@@ -15,7 +18,13 @@ window.addEventListener('load', () => {
         } else {
             animationTimeline();
         }
+        // Reveal content once decision is made
+        document.body.classList.remove('prompt-active');
     });
+
+    // Fun mode removed
+    // Safety: if SweetAlert fails to show/resolve, reveal content after 3s
+    setTimeout(() => document.body.classList.remove('prompt-active'), 3000);
 });
 
 
@@ -79,13 +88,14 @@ const animationTimeline = () => {
     // timeline
     const tl = new TimelineMax();
 
-    tl.to(".container", 0.6, {
-        visibility: "visible"
-    })
+        // Ensure we can reveal beyond minimal-start
+        tl.call(function(){ document.body.classList.remove('minimal-start'); })
+            .to(".container", 0.2, { visibility: "visible" })
     .from(".one", 0.7, {
         opacity: 0,
         y: 10
     })
+    // transition to the next section
     .from(".two", 0.4, {
         opacity: 0,
         y: 10
@@ -142,10 +152,30 @@ const animationTimeline = () => {
             y: -150
         },
     "+=1")
+    // Gag scenes sequence
+    .from('.gag-1', 0.6, { opacity: 0, y: 12 })
+    .to('.gag-1', 0.5, { opacity: 0, y: -10 }, "+=2.2")
+    .from('.gag-2', 0.6, { opacity: 0, y: 12 })
+    .call(function(){
+        const items = ['Bánh kem xịn', 'Đi chơi vui', 'Ảnh chụp đẹp', 'Điều ước to'];
+        const el = document.querySelector('.gag-2 .slot');
+        if (!el) return;
+        let i = 0; const max = 12; const spin = setInterval(() => {
+            el.textContent = items[i % items.length]; i++;
+            if (i > max) { clearInterval(spin); el.textContent = 'Niềm vui bất ngờ'; }
+        }, 120);
+    })
+    .to('.gag-2', 0.5, { opacity: 0, y: -10 }, "+=2.2")
+    .from('.gag-3', 0.6, { opacity: 0, y: 12 })
+    .to('.gag-3 .badge', 0.5, { scale: 1.08 }, 0)
+    .to('.gag-3', 0.5, { opacity: 0, y: -10 }, "+=2.2")
+    .from([".idea-1"], 0.001, { autoAlpha: 0 })
     .from(".idea-1", 0.7, ideaTextTrans)
     .to(".idea-1", 0.7, ideaTextTransLeave, "+=2.5")
+    .from([".idea-2"], 0.001, { autoAlpha: 0 })
     .from(".idea-2", 0.7, ideaTextTrans)
     .to(".idea-2", 0.7, ideaTextTransLeave, "+=2.5")
+    .from([".idea-3"], 0.001, { autoAlpha: 0 })
     .from(".idea-3", 0.7, ideaTextTrans)
     .to(".idea-3 strong", 0.5, {
         scale: 1.2,
@@ -154,8 +184,10 @@ const animationTimeline = () => {
         color: "#fff",
     })
     .to(".idea-3", 0.7, ideaTextTransLeave, "+=2.5")
+    .from([".idea-4"], 0.001, { autoAlpha: 0 })
     .from(".idea-4", 0.7, ideaTextTrans)
     .to(".idea-4", 0.7, ideaTextTransLeave, "+=2.5")
+    .from([".idea-5"], 0.001, { autoAlpha: 0 })
     .from(
         ".idea-5",
         0.7, {
@@ -184,6 +216,7 @@ const animationTimeline = () => {
         },
         "+=2"
     )
+    .from([".idea-6"], 0.001, { autoAlpha: 0 })
     .staggerFrom(
         ".idea-6 span",
         0.8, {
@@ -205,17 +238,23 @@ const animationTimeline = () => {
         0.2,
         "+=1.5"
     )
-    .staggerFromTo(
-        ".baloons img",
-        2.5, {
-            opacity: 0.9,
-            y: 1400,
-        }, {
-            opacity: 1,
-            y: -1000,
-        },
-        0.2
-    )
+    // Balloons: skip in clean mode
+    .call(function(){
+        if (!document.body.classList.contains('clean')) {
+            TweenMax.staggerFromTo(
+                ".baloons img",
+                2.5, {
+                    opacity: 0.9,
+                    y: 1400,
+                }, {
+                    opacity: 1,
+                    y: -1000,
+                },
+                0.2
+            );
+        }
+    })
+    .from([".six"], 0.001, { autoAlpha: 0 })
     .from(
         ".profile-picture",
         0.5, {
@@ -227,6 +266,7 @@ const animationTimeline = () => {
         },
         "-=2"
     )
+    .to([".photo-chip", ".photo-caption"], 0.5, { opacity: 1, y: 0, clearProps: 'transform' }, "-=1.4")
     .from(".hat", 0.5, {
         x: -100,
         y: 350,
@@ -237,26 +277,25 @@ const animationTimeline = () => {
         ".wish-hbd span",
         0.7, {
             opacity: 0,
-            y: -50,
-            // scale: 0.3,
-            rotation: 150,
-            skewX: "30deg",
+            y: -30,
+            rotation: 120,
+            skewX: "20deg",
             ease: Elastic.easeOut.config(1, 0.5),
         },
-        0.1
+        0.08
     )
     .staggerFromTo(
         ".wish-hbd span",
         0.7, {
-            scale: 1.4,
-            rotationY: 150,
+            scale: 1.25,
+            rotationY: 120,
         }, {
             scale: 1,
             rotationY: 0,
-            color: "#ff69b4",
+            color: document.body.classList.contains('clean') ? "#222" : "#ff69b4",
             ease: Expo.easeOut,
         },
-        0.1,
+        0.08,
         "party"
     )
     .from(
@@ -268,22 +307,28 @@ const animationTimeline = () => {
         },
         "party"
     )
-    .staggerTo(
-        ".eight svg",
-        1.5, {
-            visibility: "visible",
-            opacity: 0,
-            scale: 80,
-            repeat: 3,
-            repeatDelay: 1.4,
-        },
-        0.3
-    )
+    // Confetti bubbles: skip in clean mode
+    .call(function(){
+        if (!document.body.classList.contains('clean')) {
+            TweenMax.staggerTo(
+                ".eight svg",
+                1.5, {
+                    visibility: "visible",
+                    opacity: 0,
+                    scale: 80,
+                    repeat: 3,
+                    repeatDelay: 1.4,
+                },
+                0.3
+            );
+        }
+    })
     .to(".six", 0.5, {
         opacity: 0,
         y: 30,
         zIndex: "-1",
     })
+    .from([".nine"], 0.001, { autoAlpha: 0 })
     .staggerFrom(".nine p", 1, ideaTextTrans, 1.2)
     .to(
         ".last-smile",
@@ -295,27 +340,9 @@ const animationTimeline = () => {
         },
         "+=1"
     )
-    // Seamlessly continue to the surprise page after a short pause
-    .call(function(){
-        setTimeout(function(){
-            // Only auto-redirect if user hasn't clicked the surprise link yet
-            if (!window.__wentToSurprise) {
-                window.location.href = 'surprise.html';
-            }
-        }, 2500);
-    });
+    // End sequence finishes here; navigation to surprise page only happens on explicit click
+    ;
 
     // Restart Animation on click
-    const replyBtn = document.getElementById("replay");
-    if (replyBtn) {
-        replyBtn.addEventListener("click", (e) => {
-            // If clicking the anchor link inside, allow navigation to surprise
-            const link = e.target && e.target.closest('a[href]');
-            if (link) {
-                window.__wentToSurprise = true;
-                return; // let the browser follow the link
-            }
-            tl.restart();
-        });
-    }
+    // Do not attach click to entire paragraph; only the final link should navigate
 }

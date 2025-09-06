@@ -9,6 +9,69 @@ body {
   margin: 0;
 }
 
+/* Clean mode: tone down the look & feel */
+body.clean .container, body.clean .container * {
+  /* keep original decorative fonts */
+  color: #222 !important; /* neutral text color */
+  text-shadow: none !important; /* remove glow */
+}
+body.clean .wish-hbd,
+body.clean #name,
+body.clean h1.one > span {
+  color: #111 !important;
+}
+body.clean .site-bg { opacity: 0.18; filter: saturate(0.9) blur(0.5px); }
+body.clean .floating-photo { box-shadow: 0 2px 10px rgba(0,0,0,0.08) !important; border-radius: 10px; }
+/* Hide balloons & confetti bursts */
+body.clean .baloons { display: none !important; }
+body.clean .eight { display: none !important; }
+/* Boxes: remove heavy borders and drop shadows */
+body.clean .four .text-box {
+  background: rgba(255,255,255,0.9) !important;
+  border: 1px solid rgba(0,0,0,0.06) !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08) !important;
+}
+/* Improve legibility of free-floating texts */
+body.clean .two,
+body.clean .three p,
+body.clean .wish h5,
+body.clean .nine p,
+body.clean .last-smile {
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+  padding: 8px 12px;
+  border-radius: 12px;
+  display: inline-block;
+  color: #111 !important;
+}
+/* Ensure links are visible in clean mode */
+body.clean .surprise-hint a { color: #0b66ff !important; text-decoration: underline !important; }
+/* Greeting paragraph: normal weight, calmer color */
+body.clean #greetingText { color: #333 !important; }
+/* HBD headline: solid, no per-letter color flash */
+body.clean .wish-hbd { color: #222 !important; text-transform: none; }
+/* Chips: use subtle neutral */
+body.clean h1.one > span,
+body.clean #name {
+  background: rgba(255,255,255,0.92) !important;
+  color: #222 !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06) !important;
+}
+/* Profile picture outline off */
+body.clean .profile-picture { outline: none !important; }
+
+/* Hide main content while the initial music prompt is shown */
+body.prompt-active .container {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+}
+
+/* Minimal start: only show the very first heading block initially */
+body.minimal-start .container > div { display: none; }
+body.minimal-start .container > .one { display: block; }
+
 /* Make main container text match the name styling: Pacifico + pink + soft glow */
 .container, .container * {
   font-family: 'Pacifico', cursive !important;
@@ -26,7 +89,7 @@ body {
   overflow: hidden;
   position: relative;
   text-align: center;
-  visibility: hidden;
+  visibility: visible; /* visible by default; JS anim will handle fades */
   width: 100vw;
   transform-origin: top center;
   transition: transform 260ms ease;
@@ -274,6 +337,15 @@ body {
   font-weight: lighter;
 }
 
+/* Gag scenes */
+.gag { position: relative; display: flex; justify-content: center; align-items: center; margin: 1rem 0; opacity: 0; transform: translateY(10px); }
+.gag-card { background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.06); border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 22px rgba(0,0,0,0.12); font-family: 'Poppins', sans-serif; }
+.gag-title { font-weight: 600; color: #e75480; margin-bottom: 6px; }
+.gag-list { margin: 0; padding-left: 1rem; }
+.gag .slot { display: inline-block; min-width: 5ch; background: #fff0f6; padding: 2px 6px; border-radius: 8px; color: #e75480; }
+.gag .badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.gag .badge { background: #fff0f6; border: 1px solid rgba(231,84,128,0.25); color: #e75480; padding: 4px 8px; border-radius: 999px; font-size: 0.9rem; }
+
 /* Ensure the final line doesn't rotate or stack; keep it centered and constrained */
 .last-smile {
   display: inline-block;
@@ -286,7 +358,6 @@ body {
 }
 
 #replay {
-  cursor: pointer;
   z-index: 3;
 }
 
@@ -375,19 +446,102 @@ body {
     margin: 1.2rem 0;
   }
 
-  h1.one { font-size: 2rem; line-height: 1.15; }
-  .two { font-size: 1rem; }
+  h1.one { font-size: clamp(1.8rem, 7vw, 2.8rem); line-height: 1.12; }
+  .two { font-size: 0.9rem; }
   .three { font-size: 1.2rem; }
   .five p { position: static; font-size: 1.25rem; }
   .idea-5 { font-size: 2.2rem; }
   .idea-6 span { font-size: 6rem; }
   .six img { height: 200px; }
 
+  /* Prevent heading chips from overflowing on small screens */
+  h1.one > span { 
+    max-width: 92vw; 
+    display: inline-block; 
+    white-space: normal !important; 
+    overflow-wrap: anywhere; 
+    word-break: break-word; 
+    padding: 0.25rem 0.5rem !important; /* tone down padding on mobile */
+  }
+  /* Scale down the name on mobile and allow wrap if needed */
+  #name { 
+    font-size: clamp(1.35rem, 8vw, 2.3rem) !important; 
+    white-space: normal !important; 
+    line-height: 1.1; 
+    max-width: 88vw; 
+    overflow-wrap: anywhere; 
+    word-break: break-word; 
+    padding: 0.2em 0.45em !important;
+  }
+
+  /* Ensure message text never overflows the white box */
+  .four .text-box, .four .text-box p { 
+    max-width: 92vw; 
+    overflow-wrap: anywhere; 
+    word-break: break-word; 
+  }
+
   /* Reduce gallery photo size on small screens */
   .gallery-photo { width: 110px; height: 110px; border-radius: 12px; }
 
   /* Keep floating background photos but reduce their max size for phones */
   .floating-photo { max-width: 120px; max-height: 120px; }
+}
+
+/* Photo chips and caption around profile image */
+.gallery-main { position: relative; display: inline-block; }
+.photo-badges { position: absolute; inset: 0; pointer-events: none; }
+.photo-chip { position: absolute; background: rgba(255,255,255,0.95); border: 1px solid rgba(0,0,0,0.06); border-radius: 999px; padding: 6px 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.12); font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: #333; opacity: 0; transform: translateY(8px); }
+.chip-left { left: -8px; top: 12%; }
+.chip-right { right: -8px; bottom: 14%; }
+.photo-caption { text-align: center; margin-top: 10px; font-family: 'Lobster', cursive; color: #ff69b4; font-size: 1.05rem; opacity: 0; transform: translateY(8px); }
+
+
+/* Extra-tight adjustments for small phones */
+@media screen and (max-width: 500px) {
+  h1.one { font-size: 1.8rem; line-height: 1.2; }
+  h1.one > span { font-size: 1.02em; max-width: 94vw; }
+  #name { font-size: clamp(1.1rem, 6.2vw, 1.4rem) !important; max-width: 90vw; }
+}
+
+/* Ultra-small screens (older devices) */
+@media screen and (max-width: 360px) {
+  h1.one { font-size: 1.35rem; }
+  #name { font-size: clamp(0.9rem, 4.6vw, 1.05rem) !important; max-width: 92vw; }
+}
+
+/* Landscape phones with short height (e.g., iPhone 14 Pro Max landscape 932x430) */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+  /* Make the main heading more prominent */
+  h1.one { font-size: clamp(1.45rem, 4.6vmin, 2.4rem); line-height: 1.08; }
+  /* Allow heading chips to take more width for fewer wraps */
+  h1.one > span { 
+    max-width: 90vw; 
+    white-space: normal !important; 
+    overflow-wrap: anywhere; 
+    word-break: break-word; 
+    padding: 0.2rem 0.5rem !important; 
+  }
+  /* Enlarge the name a bit for better emphasis */
+  #name { 
+    font-size: clamp(1.35rem, 5vmin, 2rem) !important; 
+    line-height: 1.06; 
+    max-width: 86vw; 
+    white-space: normal !important; 
+    overflow-wrap: anywhere; 
+    word-break: break-word; 
+    padding: 0.18em 0.5em !important; 
+  }
+  /* Tone down supporting copy so it doesn't dominate */
+  .two, #greetingText { 
+    font-size: clamp(0.9rem, 1.8vw, 1.05rem) !important; 
+    line-height: 1.25; 
+  }
+  .four .text-box { max-width: 82vw; }
+  .four .text-box .hbd-chatbox { 
+    font-size: clamp(0.9rem, 1.6vw, 1.08rem) !important; 
+    line-height: 1.35; 
+  }
 }
 
 /* Show a gentle rotate-to-landscape overlay on portrait mobile to encourage horizontal viewing */
@@ -413,8 +567,7 @@ body {
 
 @media screen and (max-width: 700px) and (orientation: portrait) {
   .rotate-tip { display: flex; }
-  /* optionally hide main content behind the tip so user rotates */
-  .container { display: none; }
+  /* keep content visible under the tip; user can still rotate to improve view */
 }
 
 /* Subtle site background image (uses image from /img/) */
@@ -440,6 +593,9 @@ body {
   100% { transform: scale(1) translate(0,0); opacity: 0.14; }
 }
 
-/* Ensure layering: site-bg (0) < body::before (1) < floating-gallery (2) < container (9999) */
-body::before { z-index: 1; }
-.floating-gallery { z-index: 2; }
+/* Ensure layering: site-bg (0) < floating/backdrops (1) < main container (999) */
+body::before { z-index: 0; }
+.floating-gallery { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+.floating-gallery .floating-photo { pointer-events: none; z-index: 1; }
+.seven, .eight { z-index: 1; pointer-events: none; }
+/* 3D tilt perspective removed with fun mode */
